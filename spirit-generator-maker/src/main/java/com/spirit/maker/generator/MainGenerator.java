@@ -24,11 +24,15 @@ public class MainGenerator {
 
         //输出根路径指定
         String projectPath = System.getProperty("user.dir");
-        String outputPath = projectPath + File.separator + "generated";
+        String outputPath = projectPath + File.separator + "generated" + File.separator + meta.getName();
         //不存在就创建文件夹
         if (!FileUtil.exist(outputPath)) {
             FileUtil.mkdir(outputPath);
         }
+        //复制从原始模板文件路径复制到生成的代码包中
+        String sourceRootPath  = meta.getFileConfig().getSourceRootPath();
+        String sourceCopyDestPath = outputPath+File.separator+".source";
+        FileUtil.copy(sourceRootPath, sourceCopyDestPath,false);
         //读取resources 目录
         ClassPathResource classPathResource = new ClassPathResource("");
         String inputResourcePath = classPathResource.getAbsolutePath();
