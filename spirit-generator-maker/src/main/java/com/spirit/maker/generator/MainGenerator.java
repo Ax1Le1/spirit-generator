@@ -82,13 +82,27 @@ public class MainGenerator {
         outputFilePath = outputBaseJavaPackagePath + "/generator/FileGenerator.java";
         DynamicFileGenerator.doGenerate(inputFilePath, outputFilePath, meta);
 
-
         // generator.MainGenerator
+        inputFilePath = inputResourcePath + File.separator + "templates/java/generator/FileGenerator.java.ftl";
+        outputFilePath = outputBaseJavaPackagePath + "/generator/FileGenerator.java";
+        DynamicFileGenerator.doGenerate(inputFilePath, outputFilePath, meta);
+        // Main
+        inputFilePath = inputResourcePath + File.separator + "templates/java/Main.java.ftl";
+        outputFilePath = outputBaseJavaPackagePath + "/Main.java";
+        DynamicFileGenerator.doGenerate(inputFilePath, outputFilePath, meta);
+
+        // pom.xml
         inputFilePath = inputResourcePath + File.separator + "templates/pom.xml.ftl";
         outputFilePath = outputPath  + File.separator + "pom.xml";
         DynamicFileGenerator.doGenerate(inputFilePath, outputFilePath, meta);
 
         //构建jar包
         JarGenerator.doGenerate(outputPath);
+
+        //封装脚本
+        String shellOutputFilePath = outputPath + File.separator + "generator";
+        String jarName = String.format("%s-%s-jar-with-dependencies.jar",meta.getName(),meta.getVersion());
+        String jarPath = "target/" + jarName;
+        ScriptGenerator.doGenerate(shellOutputFilePath,jarPath);
     }
 }
