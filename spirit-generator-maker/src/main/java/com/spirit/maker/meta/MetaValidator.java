@@ -4,6 +4,9 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
+import com.spirit.maker.meta.enums.FileGenerateTypeEnum;
+import com.spirit.maker.meta.enums.FileTypeEnum;
+import com.spirit.maker.meta.enums.ModelTypeEnum;
 
 import java.io.File;
 import java.nio.file.Paths;
@@ -43,7 +46,7 @@ public class MetaValidator {
 
             String modelInfoType = modelInfo.getType();
             if (StrUtil.isEmpty(modelInfoType)) {
-                modelInfo.setType("String");
+                modelInfo.setType(ModelTypeEnum.STRING.getText());
             }
         }
     }
@@ -71,7 +74,7 @@ public class MetaValidator {
             fileConfig.setOutputRootPath(defaultOutputRootPath);
         }
         String fileConfigType = fileConfig.getType();
-        String defaultType = "dir";
+        String defaultType = FileTypeEnum.DIR.getValue();
         if (StrUtil.isEmpty(fileConfigType)) {
             fileConfig.setType(defaultType);
         }
@@ -98,9 +101,9 @@ public class MetaValidator {
             if (StrUtil.isBlank(type)) {
                 // 无文件后缀
                 if (StrUtil.isBlank(FileUtil.getSuffix(inputPath))) {
-                    fileInfo.setType("dir");
+                    fileInfo.setType(FileTypeEnum.DIR.getText());
                 } else {
-                    fileInfo.setType("file");
+                    fileInfo.setType(FileTypeEnum.FILE.getValue());
                 }
             }
 
@@ -109,9 +112,9 @@ public class MetaValidator {
             if (StrUtil.isBlank(generateType)) {
                 // 动态模板
                 if (inputPath.endsWith(".ftl")) {
-                    fileInfo.setGenerateType("dynamic");
+                    fileInfo.setGenerateType(FileGenerateTypeEnum.DYNAMIC.getText());
                 } else {
-                    fileInfo.setGenerateType("static");
+                    fileInfo.setGenerateType(FileGenerateTypeEnum.STATIC.getText());
                 }
             }
         }
