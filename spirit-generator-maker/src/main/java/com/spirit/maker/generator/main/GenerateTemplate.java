@@ -1,8 +1,10 @@
-package com.spirit.maker.generator;
+package com.spirit.maker.generator.main;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.resource.ClassPathResource;
 import cn.hutool.core.util.StrUtil;
+import com.spirit.maker.generator.JarGenerator;
+import com.spirit.maker.generator.ScriptGenerator;
 import com.spirit.maker.generator.file.DynamicFileGenerator;
 import com.spirit.maker.meta.Meta;
 import com.spirit.maker.meta.MetaManager;
@@ -12,13 +14,13 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * MainGenerator
+ * GenerateTemplate
  *
  * @author yaojc
- * @date 2024/3/12
+ * @date 2024/3/14
  */
-public class MainGenerator {
-    public static void main(String[] args) throws Exception {
+public class GenerateTemplate {
+    public void doGenerate() throws Exception {
         Meta meta = MetaManager.getMetaObject();
         System.out.println(meta);
 
@@ -29,10 +31,48 @@ public class MainGenerator {
         if (!FileUtil.exist(outputPath)) {
             FileUtil.mkdir(outputPath);
         }
-        //复制从原始模板文件路径复制到生成的代码包中
-        String sourceRootPath  = meta.getFileConfig().getSourceRootPath();
-        String sourceCopyDestPath = outputPath+File.separator+".source";
-        FileUtil.copy(sourceRootPath, sourceCopyDestPath,false);
+        //1.复制文件
+        String sourceCopyDestPath = copySource(meta, outputPath);
+        //2.代码生成
+        generateCode(meta, outputPath);
+
+        //3.构建jar包
+        String jarPath = buildJar(outputPath, meta);
+
+        //4.封装脚本
+        String shellOutputFilePath = getBuildScript(jarPath, outputPath);
+        //5.生成精简版的程序（产物包）
+        buildDist(outputPath, sourceCopyDestPath, jarPath,shellOutputFilePath);
+    }
+
+    protected  void buildDist(String outputPath, String sourceCopyDestPath, String jarPath,String shellOutputFilePath) {
+        String distOutputPath = outputPath + "-dist";
+        //拷贝jar包
+        String targetAbsolutePath = distOutputPath + File.separator + "target";
+        FileUtil.mkdir(targetAbsolutePath);
+        String jarAbsolutePath = outputPath + File.separator + jarPath;
+        FileUtil.copy(jarAbsolutePath, targetAbsolutePath, true);
+        //拷贝脚本文件
+        FileUtil.copy(shellOutputFilePath, distOutputPath, true);
+        FileUtil.copy(shellOutputFilePath + ".bat", distOutputPath, true);
+        //拷贝原模板文件
+        FileUtil.copy(sourceCopyDestPath, distOutputPath, true);
+    }
+
+    protected  String getBuildScript(String jarPath, String outputPath) {
+        String shellOutputFilePath = outputPath + File.separator + "generator";
+        ScriptGenerator.doGenerate(shellOutputFilePath, jarPath);
+        return shellOutputFilePath;
+    }
+
+    protected  String buildJar(String outputPath,Meta meta) throws Exception {
+        String jarName = String.format("%s-%s-jar-with-dependencies.jar", meta.getName(), meta.getVersion());
+        String jarPath = "target/" + jarName;
+        JarGenerator.doGenerate(outputPath);
+        return jarPath;
+    }
+
+    protected  void generateCode(Meta meta, String outputPath) throws IOException, TemplateException {
         //读取resources 目录
         ClassPathResource classPathResource = new ClassPathResource("");
         String inputResourcePath = classPathResource.getAbsolutePath();
@@ -92,33 +132,19 @@ public class MainGenerator {
         DynamicFileGenerator.doGenerate(inputFilePath, outputFilePath, meta);
         // 生成README.md 项目介绍文件
         inputFilePath = inputResourcePath + File.separator + "templates/README.md.ftl";
-        outputFilePath = outputPath  + File.separator + "README.md";
+        outputFilePath = outputPath + File.separator + "README.md";
         DynamicFileGenerator.doGenerate(inputFilePath, outputFilePath, meta);
 
         // pom.xml
         inputFilePath = inputResourcePath + File.separator + "templates/pom.xml.ftl";
-        outputFilePath = outputPath  + File.separator + "pom.xml";
+        outputFilePath = outputPath + File.separator + "pom.xml";
         DynamicFileGenerator.doGenerate(inputFilePath, outputFilePath, meta);
+    }
 
-        //构建jar包
-        JarGenerator.doGenerate(outputPath);
-
-        //封装脚本
-        String shellOutputFilePath = outputPath + File.separator + "generator";
-        String jarName = String.format("%s-%s-jar-with-dependencies.jar",meta.getName(),meta.getVersion());
-        String jarPath = "target/" + jarName;
-        ScriptGenerator.doGenerate(shellOutputFilePath,jarPath);
-        //生成精简版的程序（产物包）
-        String distOutputPath = outputPath +"-dist";
-        //拷贝jar包
-        String targetAbsolutePath = distOutputPath + File.separator + "target";
-        FileUtil.mkdir(targetAbsolutePath);
-        String jarAbsolutePath = outputPath + File.separator + jarPath;
-        FileUtil.copy(jarAbsolutePath, targetAbsolutePath,true);
-        //拷贝脚本文件
-        FileUtil.copy(shellOutputFilePath, distOutputPath,true);
-        FileUtil.copy(shellOutputFilePath + ".bat", distOutputPath,true);
-        //拷贝原模板文件
-        FileUtil.copy(sourceCopyDestPath, distOutputPath,true);
+    protected  String copySource(Meta meta, String outputPath) {
+        String sourceRootPath = meta.getFileConfig().getSourceRootPath();
+        String sourceCopyDestPath = outputPath + File.separator + ".source";
+        FileUtil.copy(sourceRootPath, sourceCopyDestPath, false);
+        return sourceCopyDestPath;
     }
 }
