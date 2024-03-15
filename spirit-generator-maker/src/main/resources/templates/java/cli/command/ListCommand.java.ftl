@@ -1,4 +1,4 @@
-package ${basePackage}.cli.command;
+package ${basePackage}.model.cli.command;
 
 import cn.hutool.core.io.FileUtil;
 import picocli.CommandLine.Command;

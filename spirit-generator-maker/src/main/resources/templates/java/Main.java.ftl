@@ -1,6 +1,6 @@
 package ${basePackage};
 
-import ${basePackage}.cli.CommandExecutor;
+import ${basePackage}.model.cli.CommandExecutor;
 
 /**
  * 全局调用入口

@@ -91,6 +91,12 @@ public class GenerateTemplate {
         outputFilePath = outputBaseJavaPackagePath + "/model/DataModel.java";
         DynamicFileGenerator.doGenerate(inputFilePath, outputFilePath, meta);
 
+
+        // generator.MainGenerator
+        inputFilePath = inputResourcePath + File.separator + "templates/java/generator/FileGenerator.java.ftl";
+        outputFilePath = outputBaseJavaPackagePath + "/generator/FileGenerator.java";
+        DynamicFileGenerator.doGenerate(inputFilePath, outputFilePath, meta);
+
         //cli.command.GenerateCommand
         inputFilePath = inputResourcePath + File.separator + "templates/java/cli/command/GenerateCommand.java.ftl";
         outputFilePath = outputBaseJavaPackagePath + "/model/cli/command/GenerateCommand.java";
@@ -121,19 +127,15 @@ public class GenerateTemplate {
         outputFilePath = outputBaseJavaPackagePath + "/generator/DynamicFileGenerator.java";
         DynamicFileGenerator.doGenerate(inputFilePath, outputFilePath, meta);
 
-        // generator.MainGenerator
-        inputFilePath = inputResourcePath + File.separator + "templates/java/generator/FileGenerator.java.ftl";
-        outputFilePath = outputBaseJavaPackagePath + "/generator/FileGenerator.java";
-        DynamicFileGenerator.doGenerate(inputFilePath, outputFilePath, meta);
 
         // Main
         inputFilePath = inputResourcePath + File.separator + "templates/java/Main.java.ftl";
         outputFilePath = outputBaseJavaPackagePath + "/Main.java";
         DynamicFileGenerator.doGenerate(inputFilePath, outputFilePath, meta);
         // 生成README.md 项目介绍文件
-        inputFilePath = inputResourcePath + File.separator + "templates/README.md.ftl";
-        outputFilePath = outputPath + File.separator + "README.md";
-        DynamicFileGenerator.doGenerate(inputFilePath, outputFilePath, meta);
+//        inputFilePath = inputResourcePath + File.separator + "templates/README.md.ftl";
+//        outputFilePath = outputPath + File.separator + "README.md";
+//        DynamicFileGenerator.doGenerate(inputFilePath, outputFilePath, meta);
 
         // pom.xml
         inputFilePath = inputResourcePath + File.separator + "templates/pom.xml.ftl";

@@ -11,6 +11,8 @@ import com.spirit.maker.meta.enums.ModelTypeEnum;
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * MetaValidator
@@ -29,15 +31,27 @@ public class MetaValidator {
     }
 
     private static void validAndFillModelConfig(Meta meta) {
+        // modelConfig 校验和默认值
         Meta.ModelConfig modelConfig = meta.getModelConfig();
         if (modelConfig == null) {
             return;
         }
         List<Meta.ModelConfig.ModelInfo> modelInfoList = modelConfig.getModels();
-        if (!CollectionUtil.isNotEmpty(modelInfoList)) {
+        if (CollectionUtil.isEmpty(modelInfoList)) {
             return;
         }
         for (Meta.ModelConfig.ModelInfo modelInfo : modelInfoList) {
+            // 第六期，新增 groupKey，标记分组配置
+            String groupKey = modelInfo.getGroupKey();
+            if (StrUtil.isNotEmpty(groupKey)){
+                // 生成中间参数
+                List<Meta.ModelConfig.ModelInfo> subModelInfoList = modelInfo.getModels();
+                String allArgsStr = subModelInfoList.stream()
+                        .map(subModelInfo -> String.format("\"--%s\"", subModelInfo.getFieldName()))
+                        .collect(Collectors.joining(", "));
+                modelInfo.setAllArgsStr(allArgsStr);
+                continue;
+            }
             // 输出路径默认值
             String fieldName = modelInfo.getFieldName();
             if (StrUtil.isBlank(fieldName)) {
@@ -46,7 +60,7 @@ public class MetaValidator {
 
             String modelInfoType = modelInfo.getType();
             if (StrUtil.isEmpty(modelInfoType)) {
-                modelInfo.setType(ModelTypeEnum.STRING.getText());
+                modelInfo.setType(ModelTypeEnum.STRING.getValue());
             }
         }
     }
@@ -85,6 +99,10 @@ public class MetaValidator {
             return;
         }
         for (Meta.FileConfig.FileInfo fileInfo : fileInfoList) {
+            String type = fileInfo.getType();
+            if (Objects.equals(type, FileTypeEnum.GROUP.getValue())) {
+                continue;
+            }
             // inputPath 必填
             String inputPath = fileInfo.getInputPath();
             if (StrUtil.isBlank(inputPath)) {
@@ -97,7 +115,6 @@ public class MetaValidator {
             }
 
             // type: 默认 inputPath 有文件后缀（如.java）为 file，否则为 dir
-            String type = fileInfo.getType();
             if (StrUtil.isBlank(type)) {
                 // 无文件后缀
                 if (StrUtil.isBlank(FileUtil.getSuffix(inputPath))) {
@@ -122,7 +139,7 @@ public class MetaValidator {
 
     private static void validAndFillMetaRoot(Meta meta) {
         // 基础信息校验和默认值
-        String name = StrUtil.blankToDefault(meta.getName(),"my-generator");
+        String name = StrUtil.blankToDefault(meta.getName(), "my-generator");
         meta.setName(name);
 
         String description = meta.getDescription();
