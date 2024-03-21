@@ -1,0 +1,418 @@
+{
+    "name": "springboot-init-generator",
+    "description": "Spring Boot 模板项目生成器",
+    "fileConfig": {
+        "sourceRootPath": "D:/yupi/spirit-generator/spirit-generator-maker/.temp/1/springboot-init",
+        "files": [
+            {
+                "type": "group",
+                "condition": "needPost",
+                "groupKey": "post",
+                "groupName": "帖子文件组",
+                "files": [
+                    {
+                        "inputPath": "src/main/java/com/yupi/springbootinit/model/entity/Post.java",
+                        "outputPath": "src/main/java/com/yupi/springbootinit/model/entity/Post.java",
+                        "type": "file",
+                        "generateType": "static"
+                    },
+                    {
+                        "inputPath": "src/main/java/com/yupi/springbootinit/model/dto/post/PostAddRequest.java",
+                        "outputPath": "src/main/java/com/yupi/springbootinit/model/dto/post/PostAddRequest.java",
+                        "type": "file",
+                        "generateType": "static"
+                    },
+                    {
+                        "inputPath": "src/main/resources/mapper/PostMapper.xml",
+                        "outputPath": "src/main/resources/mapper/PostMapper.xml",
+                        "type": "file",
+                        "generateType": "static"
+                    },
+                    {
+                        "inputPath": "src/main/java/com/yupi/springbootinit/service/impl/PostServiceImpl.java",
+                        "outputPath": "src/main/java/com/yupi/springbootinit/service/impl/PostServiceImpl.java",
+                        "type": "file",
+                        "generateType": "static"
+                    },
+                    {
+                        "inputPath": "src/main/java/com/yupi/springbootinit/model/dto/post/PostEsDTO.java",
+                        "outputPath": "src/main/java/com/yupi/springbootinit/model/dto/post/PostEsDTO.java",
+                        "type": "file",
+                        "generateType": "static"
+                    },
+                    {
+                        "inputPath": "src/main/java/com/yupi/springbootinit/model/dto/post/PostUpdateRequest.java",
+                        "outputPath": "src/main/java/com/yupi/springbootinit/model/dto/post/PostUpdateRequest.java",
+                        "type": "file",
+                        "generateType": "static"
+                    },
+                    {
+                        "inputPath": "src/main/java/com/yupi/springbootinit/controller/PostController.java",
+                        "outputPath": "src/main/java/com/yupi/springbootinit/controller/PostController.java",
+                        "type": "file",
+                        "generateType": "static"
+                    },
+                    {
+                        "inputPath": "src/main/java/com/yupi/springbootinit/model/dto/post/PostQueryRequest.java",
+                        "outputPath": "src/main/java/com/yupi/springbootinit/model/dto/post/PostQueryRequest.java",
+                        "type": "file",
+                        "generateType": "static"
+                    },
+                    {
+                        "inputPath": "src/main/java/com/yupi/springbootinit/mapper/PostMapper.java",
+                        "outputPath": "src/main/java/com/yupi/springbootinit/mapper/PostMapper.java",
+                        "type": "file",
+                        "generateType": "static"
+                    },
+                    {
+                        "inputPath": "src/main/java/com/yupi/springbootinit/service/PostService.java",
+                        "outputPath": "src/main/java/com/yupi/springbootinit/service/PostService.java",
+                        "type": "file",
+                        "generateType": "static"
+                    }
+                ]
+            },
+            {
+                "inputPath": "src/main/java/com/yupi/springbootinit/common/ErrorCode.java",
+                "outputPath": "src/main/java/com/yupi/springbootinit/common/ErrorCode.java",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": "src/main/java/com/yupi/springbootinit/exception/BusinessException.java",
+                "outputPath": "src/main/java/com/yupi/springbootinit/exception/BusinessException.java",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": ".gitignore",
+                "outputPath": ".gitignore",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": "src/main/java/com/yupi/springbootinit/common/PageRequest.java",
+                "outputPath": "src/main/java/com/yupi/springbootinit/common/PageRequest.java",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": "src/main/java/com/yupi/springbootinit/config/MyBatisPlusConfig.java",
+                "outputPath": "src/main/java/com/yupi/springbootinit/config/MyBatisPlusConfig.java",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": "src/main/java/com/yupi/springbootinit/model/enums/UserRoleEnum.java",
+                "outputPath": "src/main/java/com/yupi/springbootinit/model/enums/UserRoleEnum.java",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": ".idea/encodings.xml",
+                "outputPath": ".idea/encodings.xml",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": "src/main/java/com/yupi/springbootinit/exception/GlobalExceptionHandler.java",
+                "outputPath": "src/main/java/com/yupi/springbootinit/exception/GlobalExceptionHandler.java",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": "src/main/java/com/yupi/springbootinit/config/Knife4jConfig.java.ftl",
+                "outputPath": "src/main/java/com/yupi/springbootinit/config/Knife4jConfig.java",
+                "type": "file",
+                "generateType": "dynamic",
+                "condition": "needDocs"
+            },
+            {
+                "inputPath": "src/main/java/com/yupi/springbootinit/service/impl/UserServiceImpl.java",
+                "outputPath": "src/main/java/com/yupi/springbootinit/service/impl/UserServiceImpl.java",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": "src/main/java/com/yupi/springbootinit/model/dto/user/UserRegisterRequest.java",
+                "outputPath": "src/main/java/com/yupi/springbootinit/model/dto/user/UserRegisterRequest.java",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": "pom.xml",
+                "outputPath": "pom.xml",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": ".idea/misc.xml",
+                "outputPath": ".idea/misc.xml",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": "src/main/resources/mapper/UserMapper.xml",
+                "outputPath": "src/main/resources/mapper/UserMapper.xml",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": "src/test/.DS_Store",
+                "outputPath": "src/test/.DS_Store",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": ".idea/vcs.xml",
+                "outputPath": ".idea/vcs.xml",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": "src/main/java/com/yupi/springbootinit/common/DeleteRequest.java",
+                "outputPath": "src/main/java/com/yupi/springbootinit/common/DeleteRequest.java",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": "src/main/java/com/yupi/springbootinit/constant/UserConstant.java",
+                "outputPath": "src/main/java/com/yupi/springbootinit/constant/UserConstant.java",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": ".idea/workspace.xml",
+                "outputPath": ".idea/workspace.xml",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": "src/main/java/com/yupi/springbootinit/model/dto/user/UserQueryRequest.java",
+                "outputPath": "src/main/java/com/yupi/springbootinit/model/dto/user/UserQueryRequest.java",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": "src/main/java/com/yupi/springbootinit/model/dto/user/UserAddRequest.java",
+                "outputPath": "src/main/java/com/yupi/springbootinit/model/dto/user/UserAddRequest.java",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": "src/main/java/com/yupi/springbootinit/MainApplication.java",
+                "outputPath": "src/main/java/com/yupi/springbootinit/MainApplication.java",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": ".DS_Store",
+                "outputPath": ".DS_Store",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": "src/.DS_Store",
+                "outputPath": "src/.DS_Store",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": "src/main/java/com/yupi/springbootinit/model/entity/User.java",
+                "outputPath": "src/main/java/com/yupi/springbootinit/model/entity/User.java",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": "src/main/java/com/yupi/springbootinit/common/ResultUtils.java",
+                "outputPath": "src/main/java/com/yupi/springbootinit/common/ResultUtils.java",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": "src/main/java/com/yupi/springbootinit/mapper/UserMapper.java",
+                "outputPath": "src/main/java/com/yupi/springbootinit/mapper/UserMapper.java",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": ".idea/jarRepositories.xml",
+                "outputPath": ".idea/jarRepositories.xml",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": "src/main/java/com/yupi/springbootinit/config/CorsConfig.java",
+                "outputPath": "src/main/java/com/yupi/springbootinit/config/CorsConfig.java",
+                "type": "file",
+                "generateType": "static",
+                "condition": "needCors"
+            },
+            {
+                "inputPath": "src/main/java/com/yupi/springbootinit/exception/ThrowUtils.java",
+                "outputPath": "src/main/java/com/yupi/springbootinit/exception/ThrowUtils.java",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": "src/main/java/com/yupi/springbootinit/controller/UserController.java",
+                "outputPath": "src/main/java/com/yupi/springbootinit/controller/UserController.java",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": ".idea/.gitignore",
+                "outputPath": ".idea/.gitignore",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": "src/main/java/com/yupi/springbootinit/common/BaseResponse.java",
+                "outputPath": "src/main/java/com/yupi/springbootinit/common/BaseResponse.java",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": "README.md",
+                "outputPath": "README.md",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": "src/main/java/com/yupi/springbootinit/model/dto/user/UserUpdateRequest.java",
+                "outputPath": "src/main/java/com/yupi/springbootinit/model/dto/user/UserUpdateRequest.java",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": "Dockerfile",
+                "outputPath": "Dockerfile",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": "src/main/java/com/yupi/springbootinit/config/JsonConfig.java",
+                "outputPath": "src/main/java/com/yupi/springbootinit/config/JsonConfig.java",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": "src/main/java/com/yupi/springbootinit/service/UserService.java",
+                "outputPath": "src/main/java/com/yupi/springbootinit/service/UserService.java",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": ".idea/compiler.xml",
+                "outputPath": ".idea/compiler.xml",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": "src/main/java/com/yupi/springbootinit/model/dto/user/UserLoginRequest.java",
+                "outputPath": "src/main/java/com/yupi/springbootinit/model/dto/user/UserLoginRequest.java",
+                "type": "file",
+                "generateType": "static"
+            },
+            {
+                "inputPath": "src/main/resources/application.yml.ftl",
+                "outputPath": "src/main/resources/application.yml",
+                "type": "file",
+                "generateType": "dynamic"
+            }
+        ]
+    },
+    "modelConfig": {
+        "models": [
+            {
+                "type": "MysqlConfig",
+                "description": "用于生成MySQL数据库配置",
+                "groupKey": "mysqlConfig",
+                "groupName": "MySQL数据库配置",
+                "models": [
+                    {
+                        "fieldName": "password",
+                        "type": "String",
+                        "description": "密码",
+                        "defaultValue": "123456"
+                    },
+                    {
+                        "fieldName": "url",
+                        "type": "String",
+                        "description": "地址",
+                        "defaultValue": "jdbc:mysql://localhost:3306/my_db"
+                    },
+                    {
+                        "fieldName": "username",
+                        "type": "String",
+                        "description": "用户名",
+                        "defaultValue": "root"
+                    }
+                ]
+            },
+            {
+                "type": "DocsConfig",
+                "description": "用于生成接口文档配置",
+                "groupKey": "docsConfig",
+                "groupName": "接口文档配置",
+                "models": [
+                    {
+                        "fieldName": "description",
+                        "type": "String",
+                        "description": "接口文档描述",
+                        "defaultValue": "springboot-init"
+                    },
+                    {
+                        "fieldName": "title",
+                        "type": "String",
+                        "description": "接口文档标题",
+                        "defaultValue": "接口文档"
+                    },
+                    {
+                        "fieldName": "version",
+                        "type": "String",
+                        "description": "接口文档版本",
+                        "defaultValue": "1.0"
+                    }
+                ],
+                "condition": "needDocs"
+            },
+            {
+                "fieldName": "needDocs",
+                "type": "boolean",
+                "description": "是否开启接口文档功能",
+                "defaultValue": true
+            },
+            {
+                "fieldName": "needPost",
+                "type": "boolean",
+                "description": "是否开启帖子功能",
+                "defaultValue": true
+            },
+            {
+                "fieldName": "needCors",
+                "type": "boolean",
+                "description": "是否开启跨域功能",
+                "defaultValue": true
+            },
+            {
+                "fieldName": "needEs",
+                "type": "boolean",
+                "description": "是否开启ES功能",
+                "defaultValue": true
+            },
+            {
+                "fieldName": "basePackage",
+                "type": "String",
+                "description": "基础包名",
+                "defaultValue": "com.spirit"
+            },
+            {
+                "fieldName": "needRedis",
+                "type": "boolean",
+                "description": "是否开启Redis功能",
+                "defaultValue": true
+            }
+        ]
+    }
+}

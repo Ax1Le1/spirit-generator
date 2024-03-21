@@ -10,12 +10,15 @@ import lombok.Data;
 public class TemplateMakerConfig {
 
     private Meta meta = new Meta();
-    
+
     private Long id;
-    
+
     private String originProjectPath;
-    
+
     TemplateMakerFileConfig fileConfig = new TemplateMakerFileConfig();
 
     TemplateMakerModelConfig modelConfig = new TemplateMakerModelConfig();
+
+    // 新增：
+    TemplateMakerOutputConfig outputConfig = new TemplateMakerOutputConfig();
 }

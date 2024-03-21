@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
  */
 public class MetaValidator {
 
-    public static void doValidaAndFill(Meta meta) {
+    public static void doValidAndFill(Meta meta) {
         validAndFillMetaRoot(meta);
         // fileConfig 校验和默认值
         validAndFillFileConfig(meta);
@@ -77,7 +77,7 @@ public class MetaValidator {
         }
         // inputRootPath: .source + sourceRootPath 的最后一个层级路径
         String inputRootPath = fileConfig.getInputRootPath();
-        String defaultInputRootPath = ".source" + File.separator + FileUtil.getLastPathEle(Paths.get(sourceRootPath)).getFileName().toString();
+        String defaultInputRootPath = ".source/" + FileUtil.getLastPathEle(Paths.get(sourceRootPath)).getFileName().toString();
         if (StrUtil.isEmpty(inputRootPath)) {
             fileConfig.setInputRootPath(defaultInputRootPath);
         }
